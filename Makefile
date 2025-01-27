@@ -22,8 +22,8 @@ SRC=$(shell find ${SRC_PATH} -type f -iname '*.c')
 OBJS=$(patsubst %.c,%.o, ${SRC})
 
 
-$(info print source $(SRC))
-$(info print target $(OBJS))
+#$(info print source $(SRC))
+#$(info print target $(OBJS))
 
 
 driver: $(OBJS)

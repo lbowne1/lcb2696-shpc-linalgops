@@ -3,13 +3,10 @@
 int main(int argc, char *argv[])
 {
 	int first, last, inc, nrepeats;
-
-	nrepeats = 3; 
-
-	first = 100;
-	last  = 500;
-	inc   = 50;
-	
+    
+    int err = get_args( argc, argv, &nrepeats, &first, &last, &inc );
+    if ( err != 0 ) return 1;
+    	
 	test_gemm(nrepeats, first, last, inc);
 
 }
