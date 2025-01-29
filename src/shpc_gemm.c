@@ -9,24 +9,20 @@ void shpc_dgemm( int m, int n, int k,
     double* B_ptr = B;
     double* C_ptr = C;
 
-    for (int row = 0; row < m; row++) {
-        A_ptr = A + (row * rsA * sizeof(double));
-        for (int col = 0; col < n; col++) {
-            B_ptr = B + (col * csB * sizeof(double));
+    for (int i = 0; i < m; i++) {
+        A_ptr = A + (i * rsA);
+        for (int j = 0; j < n; j++) {
+            B_ptr = B + (j * csB);
             int sum = 0;
-            for (int ele = 0; ele < k; ele++) {
+            for (int p = 0; p < k; p++) {
                 sum += (*A_ptr * *B_ptr);
-                A_ptr += (csA * sizeof(double));
-                B_ptr += (rsB * sizeof(double));
+                A_ptr += csA;
+                B_ptr += rsB;
             }
-            C_ptr = (row * rsC * sizeof(double)) + (col * csC * sizeof(double));
-            *C_ptr = sum;
+            C_ptr = (C + i * rsC + j * csC);
+            *C_ptr += sum;
         }
     } 
-
-    free(A_ptr);
-    free(B_ptr);
-    free(C_ptr);
 
     return;
 }   
