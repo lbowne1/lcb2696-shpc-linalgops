@@ -6,11 +6,18 @@ void shpc_dgemv (
     double *x , int incx ,
     double *y , int incy)
 {
+    double* ptr_A = A;
+    double* ptr_x = x;
+    double* ptr_y = y;
+
     for (int i = 0; i < m; i++) {
-        double sum = 0.0;
+        ptr_A = A + ( i * rsA );
+        ptr_x = x;
         for (int j = 0; j < n; j++) {
-            sum += ((*(A + (i * rsA) + (j * csA))) * (*(x + (j * incx))));
+            *ptr_y += (*ptr_A) * (*ptr_x);
+            ptr_A += csA;
+            ptr_x += incx;
         }
-        *(y + (i * incy)) += sum;
+        ptr_y += incy;
     }
 }

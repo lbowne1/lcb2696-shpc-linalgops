@@ -7,7 +7,12 @@ void shpc_ddot(
     double *rho)
 {
     *rho = 0.0;
+    double *ptr_x = x;
+    double *ptr_y = y;
+
     for (int i = 0; i < n; i++) {
-        *rho += ((*(x + (i * incx)) * (*(y + (i * incy)))));
+        *rho += (*ptr_x) * (*ptr_y);
+        ptr_x += incx;
+        ptr_y += incy;
     }
 }
