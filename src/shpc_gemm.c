@@ -5,19 +5,15 @@ void shpc_dgemm( int m, int n, int k,
                     double *B, int rsB, int csB,                                
                     double *C, int rsC, int csC )
 {
-    double* A_ptr;
-    double* B_ptr;
+    double* ptr_A;
+    double* ptr_B;
+    double* ptr_C;
 
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
-            double sum = 0.0;
-            A_ptr = A + (i * rsA);
-            B_ptr = B + (j * csB);
             for (int p = 0; p < k; p++) {
-                sum += ((*(A_ptr + (p * csA))) * (*(B_ptr + (p * rsB))));
+                C[i * rsC + j * csC] += A[i * rsA + p * csA] * B[p * rsB + j * csB];
             }
-
-            *(C + (i * rsC) + (j * csC)) += sum; 
         }
     } 
 
