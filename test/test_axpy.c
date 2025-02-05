@@ -20,7 +20,6 @@ int test_axpy( int nrepeats, int first, int last, int inc)
 	double diff, maxdiff = 0.0;
 	incx = incy = 1;
 
-	srand48( time( NULL ) );
 	alpha = 1.5;
 
 	printf( "%% --------- DAXPY --------- \n"); 
@@ -40,6 +39,8 @@ int test_axpy( int nrepeats, int first, int last, int inc)
 
 		bli_drandv( n, x, incx );
         bli_drandv( n, y_old, incy );
+
+		maxdiff = 0.0;
 
 		for ( irep=0; irep<nrepeats; irep++ )
 		{

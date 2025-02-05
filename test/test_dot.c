@@ -29,6 +29,7 @@ int test_dot( int nrepeats, int first, int last, int inc)
     	n = size;
 		rho = rho_ref = 0.0;
 		incx = incy = 1;
+		maxdiff = 0.0;
 
     	x = ( double * ) malloc( n * sizeof( double ) );
     	y = ( double * ) malloc( n * sizeof( double ) );

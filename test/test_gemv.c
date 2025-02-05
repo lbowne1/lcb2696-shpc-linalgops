@@ -33,6 +33,7 @@ int test_gemv( int nrepeats, int first, int last, int inc)
 	for ( size=last; size>= first; size-=inc )
 	{
     	/* we will only time cases where all three matrices are square */
+		maxdiff = 0.0;
     	m = n = size;
 		csA = m;
 		rsA = 1;
