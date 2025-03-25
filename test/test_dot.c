@@ -27,12 +27,15 @@ int test_dot( int nrepeats, int first, int last, int inc)
 	{
     	/* we will only time cases where all three matrices are square */
     	n = size;
-		rho = rho_ref = 0.0;
+
+		double randtest;                                                            
+		rho = rho_ref = bli_drands( randtest );  
+
 		incx = incy = 1;
 		maxdiff = 0.0;
 
-    	x = ( double * ) malloc( n * sizeof( double ) );
-    	y = ( double * ) malloc( n * sizeof( double ) );
+    	x = ( double * ) malloc( incx * n * sizeof( double ) );
+    	y = ( double * ) malloc( incy * n * sizeof( double ) );
 
 		bli_drandv( n, x, incx );
         bli_drandv( n, y, incy );
@@ -43,7 +46,7 @@ int test_dot( int nrepeats, int first, int last, int inc)
 
 			t_start = bli_clock();
 		
-			bli_ddotv( BLIS_NO_CONJUGATE, BLIS_NO_CONJUGATE,
+			bli_dotxv( BLIS_NO_CONJUGATE, BLIS_NO_CONJUGATE,
                         n,
                         x, incx,
                         y, incy,

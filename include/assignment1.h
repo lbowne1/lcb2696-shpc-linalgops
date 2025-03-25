@@ -6,6 +6,7 @@
 
 #define dabs( x ) ( (x) < 0 ? -(x) : x )
 #define max(x, y) (((x) > (y)) ? (x) : (y))
+#define _XOPEN_SOURCE 
 
 
 #include "blis.h"

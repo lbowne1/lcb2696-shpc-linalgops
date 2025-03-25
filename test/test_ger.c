@@ -39,8 +39,8 @@ int test_ger( int nrepeats, int first, int last, int inc)
 		rsA = 1;
 
     	A = ( double * ) malloc( csA * n * sizeof( double ) );
-    	x = ( double * ) malloc( m * sizeof( double ) );
-    	y = ( double * ) malloc( n * sizeof( double ) );
+    	x = ( double * ) malloc( incx * m * sizeof( double ) );
+    	y = ( double * ) malloc( incy * n * sizeof( double ) );
     	A_old = ( double * ) malloc( csA * n * sizeof( double ) );
     	A_ref = ( double * ) malloc( csA * n * sizeof( double ) );
 

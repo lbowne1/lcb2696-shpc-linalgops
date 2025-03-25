@@ -38,11 +38,11 @@ int test_gemv( int nrepeats, int first, int last, int inc)
 		csA = m;
 		rsA = 1;
 
-    	A = ( double * ) malloc( m * n * sizeof( double ) );
-    	x = ( double * ) malloc( n * sizeof( double ) );
-    	y = ( double * ) malloc( n * sizeof( double ) );
-    	y_ref = ( double * ) malloc( n * sizeof( double ) );
-    	y_old = ( double * ) malloc( n * sizeof( double ) );
+    	A = ( double * ) malloc( csA * n * sizeof( double ) );
+    	x = ( double * ) malloc( incx * n * sizeof( double ) );
+    	y = ( double * ) malloc( incy * n * sizeof( double ) );
+    	y_ref = ( double * ) malloc( incy * n * sizeof( double ) );
+    	y_old = ( double * ) malloc( incy * n * sizeof( double ) );
 
 
 		bli_drandm( 0, BLIS_DENSE, m, n, A, rsA, csA);

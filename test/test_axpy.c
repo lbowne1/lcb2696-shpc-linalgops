@@ -20,7 +20,8 @@ int test_axpy( int nrepeats, int first, int last, int inc)
 	double diff, maxdiff = 0.0;
 	incx = incy = 1;
 
-	alpha = 1.5;
+	double randtest;  
+	alpha =  bli_drands( randtest );
 
 	printf( "%% --------- DAXPY --------- \n"); 
 	printf( "data_daxpy" );
@@ -32,10 +33,10 @@ int test_axpy( int nrepeats, int first, int last, int inc)
     	/* we will only time cases where all three matrices are square */
     	n = size;
 
-    	x = ( double * ) malloc( n * sizeof( double ) );
-    	y = ( double * ) malloc( n * sizeof( double ) );
-    	y_ref = ( double * ) malloc( n * sizeof( double ) );
-    	y_old = ( double * ) malloc( n * sizeof( double ) );
+    	x = ( double * ) malloc( incx * n * sizeof( double ) );
+    	y = ( double * ) malloc( incy * n * sizeof( double ) );
+    	y_ref = ( double * ) malloc( incy * n * sizeof( double ) );
+    	y_old = ( double * ) malloc( incy * n * sizeof( double ) );
 
 		bli_drandv( n, x, incx );
         bli_drandv( n, y_old, incy );
