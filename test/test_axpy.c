@@ -8,7 +8,7 @@ int test_axpy( int nrepeats, int first, int last, int inc)
 	int incx, incy;
 
 	double *x, *y, *y_ref, *y_old;
-	double alpha;
+	double *alpha;
 
 
 	double t_ref = DBL_MAX;
@@ -19,9 +19,6 @@ int test_axpy( int nrepeats, int first, int last, int inc)
 
 	double diff, maxdiff = 0.0;
 	incx = incy = 1;
-
-	double randtest;  
-	alpha =  bli_drands( randtest );
 
 	printf( "%% --------- DAXPY --------- \n"); 
 	printf( "data_daxpy" );
@@ -37,21 +34,23 @@ int test_axpy( int nrepeats, int first, int last, int inc)
     	y = ( double * ) malloc( incy * n * sizeof( double ) );
     	y_ref = ( double * ) malloc( incy * n * sizeof( double ) );
     	y_old = ( double * ) malloc( incy * n * sizeof( double ) );
+		alpha = ( double * ) malloc( sizeof( double ) );
 
 		bli_drandv( n, x, incx );
         bli_drandv( n, y_old, incy );
+		bli_drandv( 1, alpha, 1 );
 
 		maxdiff = 0.0;
 
 		for ( irep=0; irep<nrepeats; irep++ )
 		{
-			memcpy( y_ref, y_old, ( n * sizeof( double ) ) );
+			memcpy( y_ref, y_old, ( incy * n * sizeof( double ) ) );
 
 			t_start = bli_clock();
 		
 			bli_daxpyv( BLIS_NO_CONJUGATE,
                         n,
-                        &alpha,
+                        alpha,
                         x, incx,
                         y_ref, incy );	
 			t_ref = bli_clock_min_diff( t_ref, t_start );
@@ -68,7 +67,7 @@ int test_axpy( int nrepeats, int first, int last, int inc)
 			t_start = bli_clock();
 		
 			shpc_daxpy( n,
-                        &alpha,
+                        alpha,
 						x, incx,
 						y, incy );	
 			

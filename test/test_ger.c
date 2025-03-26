@@ -52,7 +52,7 @@ int test_ger( int nrepeats, int first, int last, int inc)
 
 		for ( irep=0; irep<nrepeats; irep++ )
 		{
-			memcpy( A_ref, A_old, m * n * sizeof( double ) );
+			memcpy( A_ref, A_old, csA * n * sizeof( double ) );
 
 			t_start = bli_clock();
 		

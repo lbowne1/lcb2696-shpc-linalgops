@@ -52,7 +52,7 @@ int test_gemv( int nrepeats, int first, int last, int inc)
 
 		for ( irep=0; irep<nrepeats; irep++ )
 		{
-			memcpy( y_ref, y_old, ( n * sizeof( double ) ) );
+			memcpy( y_ref, y_old, ( incy * n * sizeof( double ) ) );
 
 			t_start = bli_clock();
 		
@@ -72,7 +72,7 @@ int test_gemv( int nrepeats, int first, int last, int inc)
 		 
 		for ( irep=0; irep<nrepeats; irep++ )
 		{
-			memcpy( y, y_old, ( n * sizeof( double ) ) );
+			memcpy( y, y_old, ( incy * n * sizeof( double ) ) );
 
 			t_start = bli_clock();
 		
